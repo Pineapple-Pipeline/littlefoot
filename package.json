@@ -6,31 +6,26 @@
   "license": "MIT",
   "repository": "goblindegook/littlefoot",
   "scripts": {
-    "clean": "rm -rf coverage dist",
+    "clean": "rimraf coverage dist",
     "build:scripts": "rollup --config --bundleConfigAsCjs",
     "build:styles": "postcss src/littlefoot.css --output dist/littlefoot.css",
     "build:types": "tsc --declaration --emitDeclarationOnly --declarationDir dist",
-    "build": "npm run clean && mkdir -p dist && concurrently 'npm run build:types' 'npm run build:scripts' 'npm run build:styles'",
+    "build": "npm run clean && mkdir -p dist && concurrently \"npm run build:types\" \"npm run build:scripts\" \"npm run build:styles\"",
     "commit": "git-cz",
     "watch:scripts": "rollup --config --bundleConfigAsCjs --watch",
     "watch:styles": "npm run build:styles --watch",
     "watch:vitest": "vitest",
-    "watch": "concurrently 'npm run watch:scripts' 'npm run watch:styles'",
+    "watch": "concurrently \"npm run watch:scripts\" \"npm run watch:styles\"",
     "format": "biome check --write .",
     "lint": "biome lint .",
     "pretest": "npm run lint",
-    "test": "concurrently 'npm run test:vitest' 'npm run test:cypress'",
-    "test:coverage": "concurrently 'npm run test:vitest --coverage' 'npm run test:cypress'",
+    "test": "concurrently \"npm run test:vitest\" \"npm run test:cypress\"",
+    "test:coverage": "concurrently \"npm run test:vitest --coverage\" \"npm run test:cypress\"",
     "test:cypress": "npm run build && cypress run",
     "test:cypress:open": "npm run build && cypress open",
     "test:vitest": "vitest run",
     "release": "standard-version",
     "prepare": "npm run build"
-  },
-  "lint-staged": {
-    "{src,test}/**/*.{js,json,ts}": [
-      "biome check --write ."
-    ]
   },
   "author": {
     "name": "Luís Rodrigues",
@@ -71,6 +66,7 @@
     "postcss": "8.4.47",
     "postcss-cli": "11.0.0",
     "postcss-preset-env": "10.0.7",
+    "rimraf": "^6.0.1",
     "rollup": "4.22.4",
     "standard-version": "9.5.0",
     "tslib": "2.7.0",
