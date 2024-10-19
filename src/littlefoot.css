@@ -68,11 +68,13 @@
   max-width: var(--popover-max-width);
   position: absolute;
   top: 0;
+  left: 0; /* Ensure we have a starting left position */
   transform-origin: var(--popover-transform-origin);
   transform: var(--popover-transform);
   transition: var(--popover-transition);
   width: var(--popover-width);
-  z-index: 1;
+  z-index: 1000; /* Increase z-index to keep it on top while dragging */
+  cursor: move; /* Add cursor indication for drag */
 
   &.is-above {
     bottom: 0;
@@ -82,6 +84,12 @@
   &.is-active {
     transform: var(--popover-active-transform);
   }
+}
+
+/* Optional: Add style during dragging */
+.littlefoot__popover.dragging {
+  opacity: 0.8; /* Slight transparency during drag */
+  z-index: 2000; /* Ensure it's always on top while dragging */
 }
 
 .littlefoot__wrapper {
